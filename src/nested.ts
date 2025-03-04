@@ -225,14 +225,14 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number,
 ): Question[] {
-    const result: Question[] = [];
+    const index = questions.findIndex((question) => question.id === targetId);
+    if (index === -1) return questions;
 
-    for (const question of questions) {
-        result.push(question);
-        if (question.id === targetId) {
-            result.push(duplicateQuestion(newId, question));
-        }
-    }
+    const duplicatedQuestion = duplicateQuestion(newId, questions[index]);
 
-    return result;
+    return [
+        ...questions.slice(0, index + 1),
+        duplicatedQuestion,
+        ...questions.slice(index + 1),
+    ];
 }
