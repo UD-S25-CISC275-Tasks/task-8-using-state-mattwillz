@@ -8,7 +8,7 @@ import { Question, QuestionType } from "./interfaces/question";
 export function makeBlankQuestion(
     id: number,
     name: string,
-    type: QuestionType,
+    type: QuestionType
 ): Question {
     return {
         id,
@@ -18,7 +18,7 @@ export function makeBlankQuestion(
         expected: "",
         options: [],
         points: 1,
-        published: false,
+        published: false
     };
 }
 
@@ -90,7 +90,7 @@ export function toMarkdown(question: Question): string {
 export function renameQuestion(question: Question, newName: string): Question {
     const newQuestion = {
         ...question,
-        name: newName,
+        name: newName
     };
 
     return newQuestion;
@@ -104,7 +104,7 @@ export function renameQuestion(question: Question, newName: string): Question {
 export function publishQuestion(question: Question): Question {
     const newQuestion = {
         ...question,
-        published: !question.published,
+        published: !question.published
     };
 
     return newQuestion;
@@ -121,7 +121,7 @@ export function duplicateQuestion(id: number, oldQuestion: Question): Question {
         ...oldQuestion,
         id: id,
         name: `Copy of ${oldQuestion.name}`,
-        published: false,
+        published: false
     };
 
     return newQuestion;
@@ -137,7 +137,7 @@ export function duplicateQuestion(id: number, oldQuestion: Question): Question {
 export function addOption(question: Question, newOption: string): Question {
     const newQuestion = {
         ...question,
-        options: [...question.options, newOption],
+        options: [...question.options, newOption]
     };
     return newQuestion;
 }
@@ -154,14 +154,14 @@ export function mergeQuestion(
     id: number,
     name: string,
     contentQuestion: Question,
-    { points }: { points: number },
+    { points }: { points: number }
 ): Question {
     const newQuestion = {
         ...contentQuestion,
         id: id,
         name: name,
         points: points,
-        published: false,
+        published: false
     };
     return newQuestion;
 }
