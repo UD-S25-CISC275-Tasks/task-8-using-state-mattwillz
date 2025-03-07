@@ -12,40 +12,33 @@ export function d6(): number {
 }
 
 export function TwoDice(): React.JSX.Element {
-    let initialLeft = d6();
-    let initialRight = d6();
-    while (initialLeft === initialRight) {
-        initialRight = d6();
-    }
-    const [leftDie, setLeftDie] = useState<number>(initialLeft);
-    const [rightDie, setRightDie] = useState<number>(initialRight);
-
-    let message = "";
-    if (leftDie === rightDie) {
-        message = leftDie === 1 ? "You Lose!" : "You Win!";
-    }
+    const [leftDie, setLeftDie] = useState<number>(1);
+    const [rightDie, setRightDie] = useState<number>(2);
 
     return (
-        <span>
+        <div>
             <span data-testid="left-die">{leftDie}</span>
             <span data-testid="right-die">{rightDie}</span>
-            <Button
-                onClick={() => {
-                    setLeftDie(d6());
-                }}
-                data-testid="left-die"
-            >
-                Roll Left
-            </Button>
-            <Button
-                onClick={() => {
-                    setRightDie(d6());
-                }}
-                data-testid="right-die"
-            >
-                Roll Right
-            </Button>
-            {message && <p>{message}</p>}
-        </span>
+            <div>
+                <Button
+                    onClick={() => {
+                        setLeftDie(d6());
+                    }}
+                >
+                    Roll Left
+                </Button>
+                <Button
+                    onClick={() => {
+                        setRightDie(d6());
+                    }}
+                >
+                    Roll Right
+                </Button>
+            </div>
+            <div>
+                {leftDie === rightDie && leftDie !== 1 && <div>You Win!</div>}
+                {leftDie === rightDie && leftDie === 1 && <div>You Lose!</div>}
+            </div>
+        </div>
     );
 }
